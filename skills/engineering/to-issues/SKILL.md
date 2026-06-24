@@ -56,10 +56,20 @@ For each approved slice, publish a new issue to the issue tracker. Use the issue
 
 Publish issues in dependency order (blockers first) so you can reference real issue identifiers in the "Blocked by" field.
 
+#### 5a. Nest the slices under a parent
+
+Before publishing, determine whether the source material has a corresponding issue on the tracker that should act as parent:
+
+- If the user invoked this skill with an issue reference, use that issue as the parent.
+- If the source is a PRD, search the issue tracker for an issue whose title or body matches the PRD title/summary. If exactly one clear match exists, use it as the parent.
+- If no clear parent exists, publish top-level issues.
+
+When a parent is identified, create each slice as a **sub-issue** of that parent (see the issue tracker's "create a sub-issue" convention) rather than relying on the `## Parent` body line alone. A native sub-issue link groups the breakdown under the parent and surfaces it in the parent's sub-issue list and progress indicator, so no one has to attach the children by hand. Do this for every slice. Keep the `## Parent` body line too — it stays useful when an agent reads the issue as plain text, where the structural link is invisible.
+
 <issue-template>
 ## Parent
 
-A reference to the parent issue on the issue tracker (if the source was an existing issue, otherwise omit this section).
+A reference to the parent issue on the issue tracker (if this slice was created as a sub-issue, or the source was an existing issue — otherwise omit this section).
 
 ## What to build
 
